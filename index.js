@@ -1,5 +1,5 @@
 const express = require("express");
-const EntryModel = require("./db/entry_model");
+const apiV1Routes = require('./routes')
 
 const phyla = ["Chytridiomycota", "Zygomycota", "Ascomycota", "Basidiomycota"];
 
@@ -14,28 +14,6 @@ app.get("/", (req, res) => {
 
 app.get("/phylum", (req, res) => res.send(phyla))
 
-app.get("/entries", async (req, res) => {
-  res.send(await EntryModel.find());
-})
-
-app.get("/entries/:id", async (req, res) => {
-  res.send(await EntryModel.findById(req.params.id));
-})
-
-app.post("/entries", async (req, res) => {
-  res.status(201).send(await EntryModel.create(req.body))
-})
-
-app.put("/entries/:id", async (req, res) => {
-  res.send(
-    await EntryModel.findByIdAndUpdate(req.params.id, req.body, {
-      returnDocument: "after",
-    })
-  )
-})
-
-app.delete("/entries/:id", async (req, res) => {
-  EntryModel.findByIdAndDelete(req.params.id, () => res.sendStatus(204))
-})
+app.use('/api/v1', apiV1Routes)
 
 app.listen(port, () => console.log(`App running at http:localhost:${port}/`))
