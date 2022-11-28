@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose
-  .connect(
-    "mongodb+srv://ejneyland:H1aFYchXJoxqq5U4@cluster0.jfa6lfl.mongodb.net/fungi?retryWrites=true&w=majority"
-  )
+mongoose.connect(process.env.ATLAS_DB_URL)
   .then(() =>
     console.log(
       mongoose.connection.readyState == 1

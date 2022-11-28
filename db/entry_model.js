@@ -5,12 +5,12 @@ const EntryModel = mongoose.model(
   new mongoose.Schema({
     phylum: {
       type: String,
-      required: true,
+      required: true
     },
     entry: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   })
 );
 

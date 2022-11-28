@@ -6,7 +6,7 @@ router.get("/", async (req, res) => {
   res.send(await EntryModel.find());
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", (req, res) => {
   EntryModel.findById(req.params.id, (err, doc) => {
     if (err) {
       res.status(404).send({ error: `Could not find entry: ${req.params.id}` });
@@ -16,12 +16,12 @@ router.get("/:id", async (req, res) => {
   });
 });
 
-router.post("/", async (req, res) => {
+router.post("/", (req, res) => {
   EntryModel.create(req.body, (err, doc) => {
     if (err) {
       res.status(422).send({ error: err.message });
     } else {
-      res.status(401).send(doc);
+      res.status(201).send(doc);
     }
   });
 });
